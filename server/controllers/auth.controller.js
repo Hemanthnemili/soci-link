@@ -12,15 +12,6 @@ export const signup = async (req, res) => {
     const user = await User.findOne({ email });
     if (user) return res.status(404).json({ error: "User Already Registered" });
 
-    if (
-      !username ||
-      !email ||
-      !password ||
-      username === "" ||
-      password === "" ||
-      email === ""
-    )
-      return res.status(404).json({ error: "All fields are required" });
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = new User({ username, email, password: hashedPassword });
