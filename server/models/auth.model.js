@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const authSchema = new mongoose.Schema(
+const userSechema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -10,24 +10,29 @@ const authSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
       required: true,
     },
-    profilePic: {
+    profilePicture: {
       type: String,
       default:
-        "https://thumbs.dreamstime.com/b/teenage-boy-mohawk-wearing-green-hoodie-smirking-camera-digital-character-avatar-ai-generation-270471572.jpg",
+        "https://thumbs.dreamstime.com/b/d-icon-avatar-cartoon-hipster-character-d-icon-avatar-cartoon-hipster-character-291470398.jpg",
     },
     bio: {
       type: String,
       default: "",
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
-const Auth = mongoose.model("Auth", authSchema);
+const User = mongoose.model("User", userSechema);
 
-export default Auth;
+export default User;
